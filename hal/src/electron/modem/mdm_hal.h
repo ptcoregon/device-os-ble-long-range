@@ -94,13 +94,17 @@ public:
         \param timeout_ms -1 blocking, else non blocking timeout in ms
         \return true if successful and connected to network, false otherwise
     */
-    bool registerNet(const char* apn = nullptr, NetStatus* status = NULL, system_tick_t timeout_ms = 10 * 60 * 1000);
+    bool registerNet(const char* apn = nullptr, NetStatus* status = NULL, system_tick_t timeout_ms = 30 * 60 * 1000);
 
     /** check if the network is available
         \param status an optional structure to with network information
         \return true if successful and connected to network, false otherwise
     */
     bool checkNetStatus(NetStatus* status = NULL);
+
+    /** check intervene registration
+    */
+    int interveneRegistration(system_tick_t start);
 
     /** checks the signal strength
         \param status an optional structure that will have current network information
@@ -492,6 +496,9 @@ public:
     void unlock();
 
     int process();
+
+    int network_debug();
+
 
 protected:
     /** Write bytes to the physical interface. This function should be
