@@ -1597,6 +1597,12 @@ int MDMParser::network_debug() {
         return -1;
     }
 
+    // Info about cell tower once it's connected
+    sendFormated("AT+CPOL?\r\n");
+    if (WAIT == waitFinalResp(nullptr, nullptr, NW_DBG_TIMEOUT)) {
+        return -1;
+    }
+
     // Reading SIM EF files
     MDM_INFO("Forbidden PLMNs");
     sendFormated("AT+CRSM=176,28539,0,0,0\r\n");
