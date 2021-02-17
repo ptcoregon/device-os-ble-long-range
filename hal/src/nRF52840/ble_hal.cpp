@@ -1359,12 +1359,14 @@ int BleObject::Observer::stopScanning() {
 
 ble_gap_scan_params_t BleObject::Observer::toPlatformScanParams() const {
     ble_gap_scan_params_t params = {};
-    params.extended = 0;
-    params.active = scanParams_.active;
+    params.extended = 1;
+    //params.active = scanParams_.active;
+    params.active = 1;
     params.interval = scanParams_.interval;
     params.window = scanParams_.window;
     params.timeout = scanParams_.timeout;
-    params.scan_phys = BLE_GAP_PHY_1MBPS;
+    // params.scan_phys = BLE_GAP_PHY_1MBPS;
+    params.scan_phys = BLE_GAP_PHY_1MBPS | BLE_GAP_PHY_CODED;
     params.filter_policy = scanParams_.filter_policy;
     return params;
 }
